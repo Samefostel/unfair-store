@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>unfair $tore — Магазин геймерських гаджетів</title>
+  <style>
+    :root {
+      --bg: #070707; 
+      --panel: #0f0f0f; 
+      --card: #0b0b0b; 
+      --muted: #9aa0a6;
+      --neon: #b3ff00; 
+      --accent: #8ab4f8; 
+      --glass: rgba(255,255,255,0.02);
+      --radius: 8px; 
+      --maxw: 1300px;
+    }
+    * { box-sizing: border-box; }
+    body { 
+      margin: 0; 
+      font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif; 
+      background: var(--bg); 
+      color: #e9f2ea; 
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* HEADER */
+    .topbar { 
+      background: linear-gradient(180deg, #0c0c0c, #0a0a0a); 
+      border-bottom: 1px solid rgba(255,255,255,0.03); 
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .container { 
+      max-width: var(--maxw); 
+      margin: 0 auto; 
+      padding: 14px 20px; 
+      display: flex; 
+      align-items: center; 
+      gap: 18px; 
+    }
+    .logo { 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+    }
+    .logo .mark { 
+      width: 48px; 
+      height: 36px; 
+      background: linear-gradient(135deg, var(--neon), #9cff2a); 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: #001; 
+      font-weight: 800; 
+      border-radius: 6px; 
+    }
+    .logo h1 { 
+      font-size: 18px; 
+      margin: 0; 
+      color: var(--neon); 
+    }
+    .catalog-btn { 
+      background: var(--neon); 
+      color: #001; 
+      padding: 10px 14px; 
+      border-radius: 6px; 
+      font-weight: 700; 
+      border: 0; 
+      cursor: pointer; 
+    }
+    .search { 
+      flex: 1; 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+    }
+    .search input { 
+      flex: 1; 
+      padding: 12px; 
+      border-radius: 6px; 
+      border: 0; 
+      background: #0b0b0b; 
+      color: #ddd; 
+    }
+    .icons { 
+      display: flex; 
+      gap: 12px; 
+      align-items: center; 
+    }
+    .icon { 
+      padding: 8px; 
+      border-radius: 6px; 
+      border: 1px solid rgba(255,255,255,0.03); 
+      background: #0b0b0b; 
+      cursor: pointer; 
+      position: relative; 
+    }
+    .badge { 
+      position: absolute; 
+      top: -6px; 
+      right: -6px; 
+      background: #ff5c5c; 
+      color: #fff; 
+      width: 20px; 
+      height: 20px; 
+      border-radius: 50%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 12px; 
+    }
+
+    /* HERO */
+    .hero { 
+      max-width: var(--maxw); 
+      margin: 20px auto; 
+      padding: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      height: 300px;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(7,7,7,0.9), rgba(7,7,7,0.5));
+    }
+    .hero .title { 
+      font-size: 32px; 
+      color: var(--neon); 
+      margin: 0 0 8px; 
+    }
+    .hero p { margin: 0; color: var(--muted); }
+    .hero .cta { margin-top: 12px; }
+
+    /* CATALOG FILTERS */
+    .catalog-filters { 
+      max-width: var(--maxw); 
+      margin: 20px auto; 
+      padding: 0 20px; 
+    }
+    .filter-buttons { 
+      display: flex; 
+      gap: 8px; 
+      overflow-x: auto; 
+      padding-bottom: 10px; 
+    }
+    .filter-btn { 
+      background: var(--card); 
+      border: 1px solid rgba(255,255,255,0.05); 
+      color: var(--muted); 
+      padding: 8px 14px; 
+      border-radius: 20px; 
+      white-space: nowrap; 
+      cursor: pointer; 
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { 
+      background: rgba(179,255,0,0.1); 
+      color: #fff; 
+    }
+    .filter-btn.active { 
+      background: var(--neon); 
+      color: #000; 
+      font-weight: 700; 
+      border-color: var(--neon); 
+    }
+
+    /* CATALOG GRID */
+    .catalog { 
+      max-width: var(--maxw); 
+      margin: 24px auto; 
+      padding: 0 20px; 
+    }
+    .catalog h2 { 
+      color: var(--neon); 
+      letter-spacing: 1px; 
+    }
+    .grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+      gap: 18px; 
+      margin-top: 18px; 
+    }
+    .card { 
+      background: var(--card); 
+      border: 1px solid rgba(255,255,255,0.03); 
+      padding: 14px; 
+      border-radius: 6px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 10px; 
+    }
+    .card .img { 
+      height: 150px; 
+      background: #0c0c0c; 
+      border-radius: 6px; 
+      background-size: cover; 
+      background-position: center; 
+      border: 1px solid rgba(255,255,255,0.02); 
+    }
+    .meta { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    .price { 
+      color: var(--neon); 
+      font-weight: 800; 
+      font-size: 20px; 
+    }
+    .buy { 
+      background: var(--neon); 
+      color: #001; 
+      padding: 10px; 
+      border-radius: 6px; 
+      border: 0; 
+      cursor: pointer; 
+      font-weight: 700; 
+    }
+    .tag { 
+      background: #122012; 
+      color: var(--neon); 
+      padding: 6px 8px; 
+      border-radius: 4px; 
+      font-size: 12px; 
+      border: 1px solid rgba(179,255,0,0.12); 
+    }
+    .small { 
+      color: var(--muted); 
+      font-size: 13px; 
+    }
+    .card .actions { 
+      display: flex; 
+      gap: 8px; 
+      align-items: center; 
+    }
+
+    /* CART PANEL */
+    .cart-panel { 
+      position: fixed; 
+      right: 24px; 
+      bottom: 24px; 
+      width: 380px; 
+      background: #0d0d0d; 
+      border-radius: 8px; 
+      padding: 12px; 
+      border: 1px solid rgba(255,255,255,0.03); 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6); 
+      transform: translateY(12px); 
+      opacity: 0; 
+      pointer-events: none; 
+      transition: all .18s ease;
+      z-index: 101;
+    }
+    .cart-panel.open { 
+      transform: translateY(0); 
+      opacity: 1; 
+      pointer-events: auto; 
+    }
+    .cart-item { 
+      display: flex; 
+      gap: 10px; 
+      align-items: center; 
+      padding: 8px; 
+      border-radius: 6px; 
+      border: 1px solid rgba(255,255,255,0.02); 
+      margin-bottom: 8px; 
+    }
+    .cart-thumb { 
+      width: 64px; 
+      height: 44px; 
+      background-size: cover; 
+      background-position: center; 
+      border-radius: 6px; 
+    }
+    .cart-total { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-top: 8px; 
+    }
+
+    /* CHECKOUT PAGE */
+    .checkout-page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(7,7,7,0.95);
+      z-index: 102;
+      overflow-y: auto;
+      display: none;
+    }
+    .checkout-container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      background: var(--panel);
+      border-radius: var(--radius);
+    }
+    .step {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .step.active {
+      display: block;
+    }
+    .step-title {
+      color: var(--neon);
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: var(--radius);
+      color: #fff;
+    }
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .btn-next, .btn-prev, .btn-submit {
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-next, .btn-submit {
+      background: var(--neon);
+      color: #000;
+      border: none;
+    }
+    .btn-prev {
+      background: none;
+      color: var(--muted);
+      border: 1px solid var(--muted);
+    }
+    .delivery-option, .payment-option {
+      background: var(--card);
+      padding: 15px;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .delivery-option:hover, .payment-option:hover {
+      border-color: var(--neon);
+    }
+    .delivery-option.selected, .payment-option.selected {
+      border-color: var(--neon);
+      background: rgba(179, 255, 0, 0.05);
+    }
+    .success-message {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .success-icon {
+      font-size: 60px;
+      color: var(--neon);
+      margin-bottom: 20px;
+    }
+    .card-details {
+      margin-top: 20px;
+      padding: 15px;
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid rgba(179, 255, 0, 0.1);
+    }
+    .card-details img {
+      max-width: 200px;
+      margin: 10px auto;
+      display: block;
+      border-radius: var(--radius);
+    }
+
+    /* FLY ANIMATION */
+    .flying { 
+      position: fixed; 
+      z-index: 9999; 
+      border-radius: 6px; 
+      pointer-events: none; 
+      transition: transform .8s cubic-bezier(.2,.9,.2,1), opacity .6s; 
+    }
+
+    /* FOOTER */
+    footer { 
+      max-width: var(--maxw); 
+      margin: 30px auto; 
+      padding: 10px 20px; 
+      color: var(--muted); 
+      font-size: 13px; 
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .container { flex-wrap: wrap; }
+      .hero { height: 250px; }
+      .hero-content { padding: 20px; }
+      .filter-buttons { gap: 6px; padding: 0 10px 10px; }
+      .cart-panel {
+        width: 90%;
+        right: 5%;
+      }
+      .checkout-container {
+        margin: 20px auto;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="logo">
+        <div class="mark">$</div>
+        <div>
+          <h1>unfair $tore</h1>
+          <div style="font-size:12px;color:var(--muted)">Магазин девайсів для геймерів</div>
+        </div>
+      </div>
+      <button class="catalog-btn">КАТАЛОГ ТОВАРІВ</button>
+      <div class="search">
+        <input id="search" placeholder="Пошук товару..." />
+        <button class="icon">🔍</button>
+      </div>
+      <div class="icons">
+        <div class="icon">Вхід</div>
+        <div class="icon">❤</div>
+        <div class="icon">≡</div>
+        <div class="icon" id="cartBtn">Корзина <div class="badge" id="cartCount">0</div></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <img src="https://i.imgur.com/JqYeYnN.jpg" alt="Gaming Gear Banner">
+    <div class="hero-content">
+      <div class="title">Нові надходження геймерських девайсів</div>
+      <p class="small">Оригінальна техніка від провідних брендів</p>
+      <div class="cta"><button class="buy">ДИВИТИСЬ НОВИНКИ</button></div>
+    </div>
+  </section>
+
+  <section class="catalog-filters">
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-category="all">Всі товари</button>
+      <button class="filter-btn" data-category="mouse">Миші</button>
+      <button class="filter-btn" data-category="keyboard">Клавіатури</button>
+      <button class="filter-btn" data-category="audio">Аудіо</button>
+      <button class="filter-btn" data-category="laptop">Ноутбуки</button>
+      <button class="filter-btn" data-category="console">Консолі</button>
+    </div>
+  </section>
+
+  <section class="catalog">
+    <h2>ПОПУЛЯРНІ ТОВАРИ</h2>
+    <div class="grid" id="products"></div>
+  </section>
+
+  <div class="cart-panel" id="cartPanel">
+    <h3>Кошик</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total"><div class="small">Всього:</div><div id="cartTotal" style="font-weight:800;color:var(--neon)">0 $</div></div>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button class="icon-btn" id="clearCart">Очистити</button>
+      <button class="buy" id="checkout">Оформити</button>
+    </div>
+  </div>
+
+  <!-- UNFAIR LOGISTICS CHECKOUT -->
+  <div class="checkout-page" id="checkoutPage">
+    <div class="checkout-container">
+      <div class="step active" id="step1">
+        <h2 class="step-title">1. Контактні дані</h2>
+        <div class="form-group">
+          <label for="fullname">Повне ім'я *</label>
+          <input type="text" id="fullname" class="form-control" placeholder="Іванов Іван Іванович" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Номер телефону *</label>
+          <input type="tel" id="phone" class="form-control" placeholder="+380 XX XXX XX XX" required>
+        </div>
+        <div class="btn-group">
+          <button class="btn-next" onclick="nextStep(1)">Далі →</button>
+        </div>
+      </div>
+
+      <div class="step" id="step2">
+        <h2 class="step-title">2. Спосіб доставки</h2>
+        <div class="delivery-option selected" onclick="selectOption(this, 'delivery')">
+          <h3>Нова Пошта</h3>
+          <p class="small">Доставка у відділення або кур'єром (1-3 дні)</p>
+        </div>
+        <div class="delivery-option" onclick="selectOption(this, 'delivery')">
+          <h3>Укрпошта</h3>
+          <p class="small">Доставка у відділення (2-5 днів)</p>
+        </div>
+        <div class="form-group">
+          <label for="city">Місто *</label>
+          <input type="text" id="city" class="form-control" placeholder="Київ" required>
+        </div>
+        <div class="form-group">
+          <label for="branch">Відділення № *</label>
+          <input type="text" id="branch" class="form-control" placeholder="Введіть номер відділення" required>
+        </div>
+        <div class="btn-group">
+          <button class="btn-prev" onclick="prevStep(2)">← Назад</button>
+          <button class="btn-next" onclick="nextStep(2)">Далі →</button>
+        </div>
+      </div>
+
+      <div class="step" id="step3">
+        <h2 class="step-title">3. Спосіб оплати</h2>
+        <div class="payment-option selected" onclick="selectOption(this, 'payment')">
+          <h3>Готівкою при отриманні</h3>
+          <p class="small">Оплата у відділенні при отриманні</p>
+        </div>
+        <div class="payment-option" onclick="selectOption(this, 'payment')">
+          <h3>Переказ на карту</h3>
+          <p class="small">Оплата на карту перед відправкою</p>
+        </div>
+        
+        <div class="card-details" id="cardDetails" style="display:none;">
+          <h4>Реквізити для оплати:</h4>
+          <p>Карта ПриватБанк: <strong>5168 7420 1234 5678</strong></p>
+          <p>Отримувач: <strong>Петров І.І.</strong></p>
+          <p>Сума: <span id="paymentAmount"></span></p>
+          <img src="https://i.imgur.com/9zQ7W9J.png" alt="QR код для оплати">
+          <p class="small">Після оплати надішліть квитанцію на WhatsApp +380991234567</p>
+        </div>
+        
+        <div class="btn-group">
+          <button class="btn-prev" onclick="prevStep(3)">← Назад</button>
+          <button class="btn-next" onclick="nextStep(3)">Далі →</button>
+        </div>
+      </div>
+
+      <div class="step" id="step4">
+        <h2 class="step-title">4. Підтвердження замовлення</h2>
+        <div class="form-group">
+          <label for="email">Email (для відстеження)</label>
+          <input type="email" id="email" class="form-control" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="comments">Коментар</label>
+          <textarea id="comments" class="form-control" rows="3" placeholder="Ваші побажання..."></textarea>
+        </div>
+        <div class="btn-group">
+          <button class="btn-prev" onclick="prevStep(4)">← Назад</button>
+          <button class="btn-submit" onclick="submitOrder()">✅ Підтвердити</button>
+        </div>
+      </div>
+
+      <div class="step" id="step5">
+        <div class="success-message">
+          <div class="success-icon">✓</div>
+          <h2>Замовлення #<span id="orderNumber"></span> прийнято!</h2>
+          <p>Ми зв'яжемося з вами для підтвердження.</p>
+          <p><strong>Графік відправок:</strong> щодня до 16:00</p>
+          <p><strong>Термін доставки:</strong> 1-3 дні після відправки</p>
+          <p>Дякуємо за довіру!</p>
+          <button class="buy" onclick="closeCheckout()" style="margin-top:20px">Повернутись до магазину</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>© unfair $tore — unfair logistics</div>
+    <div class="small" style="margin-top:8px">Графік роботи: Пн-Нд 10:00-20:00 | Безкоштовна доставка від 199$</div>
+  </footer>
+
+  <script>
+    const PRODUCTS = [
+      {id:1, name:'Razer DeathAdder V3', cat:['mouse'], price:69, image:'https://images.unsplash.com/photo-1612810807260-c4b2b2f9b1b6?auto=format&fit=crop&w=800&q=60', tag:'Хіт'},
+      {id:2, name:'Logitech G Pro X Headset', cat:['audio'], price:129, image:'https://images.unsplash.com/photo-1606813902835-2c8a3d6a7a7b?auto=format&fit=crop&w=800&q=60', tag:'NEW'},
+      {id:3, name:'Corsair K70 RGB', cat:['keyboard'], price:149, image:'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=800&q=60', tag:'Акція'},
+      {id:4, name:'ASUS ROG Zephyrus', cat:['laptop'], price:1799, image:'https://images.unsplash.com/photo-1612832021021-4f4b1f3f0aef?auto=format&fit=crop&w=1200&q=60', tag:''},
+      {id:5, name:'HyperX Cloud II', cat:['audio'], price:99, image:'https://images.unsplash.com/photo-1545235617-9465b4ef2f2b?auto=format&fit=crop&w=800&q=60', tag:'Готово'},
+      {id:6, name:'SteelSeries Rival 3', cat:['mouse'], price:39, image:'https://images.unsplash.com/photo-1580281657524-7f9f3b1a9e73?auto=format&fit=crop&w=800&q=60', tag:''},
+      {id:7, name:'Nintendo Switch (Lite)', cat:['console'], price:199, image:'https://images.unsplash.com/photo-1579758629931-6d3e6b4ef7ad?auto=format&fit=crop&w=800&q=60', tag:'Бест'},
+      {id:8, name:'Elgato Stream Deck', cat:['stream'], price:149, image:'https://images.unsplash.com/photo-1606312619343-1c4f5f2b7f7a?auto=format&fit=crop&w=800&q=60', tag:'Top'}
+    ];
+
+    let state = { 
+      cart: JSON.parse(localStorage.getItem('uf_cart') || '[]'),
+      delivery: 'nova-poshta',
+      payment: 'cash'
+    };
+
+    // DOM Elements
+    const productsEl = document.getElementById('products');
+    const cartCount = document.getElementById('cartCount');
+    const cartPanel = document.getElementById('cartPanel');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartBtn = document.getElementById('cartBtn');
+    const checkoutBtn = document.getElementById('checkout');
+    const checkoutPage = document.getElementById('checkoutPage');
+    const clearCartBtn = document.getElementById('clearCart');
+    const cardDetails = document.getElementById('cardDetails');
+    const paymentAmount = document.getElementById('paymentAmount');
+
+    // Initialize
+    renderProducts();
+    renderCart();
+    updateCartUI();
+
+    // Event Listeners
+    cartBtn.addEventListener('click', () => {
+      cartPanel.classList.toggle('open');
+      renderCart();
+    });
+
+    checkoutBtn.addEventListener('click', openCheckout);
+    clearCartBtn.addEventListener('click', clearCart);
+
+    // Functions
+    function renderProducts(category = 'all') {
+      productsEl.innerHTML = '';
+      const filtered = category === 'all' 
+        ? PRODUCTS 
+        : PRODUCTS.filter(p => p.cat.includes(category));
+      
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="img" style="background-image:url(${p.image})"></div>
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <div style="flex:1">
+              <div style="font-weight:700;margin-bottom:6px">${p.name}</div>
+              <div class="small">Категорія: ${p.cat.join(', ')}</div>
+            </div>
+            <div>${p.tag ? `<div class="tag">${p.tag}</div>` : ''}</div>
+          </div>
+          <div class="meta">
+            <div class="price">${p.price} $</div>
+            <div class="actions"><button class="buy" data-id="${p.id}">КУПИТИ</button></div>
+          </div>
+        `;
+        productsEl.appendChild(card);
+      });
+
+      // Add event listeners to buy buttons
+      document.querySelectorAll('.buy').forEach(b => {
+        b.addEventListener('click', (e) => {
+          const id = +e.currentTarget.dataset.id;
+          addToCart(id, e.currentTarget);
+        });
+      });
+    }
+
+    function renderCart() {
+      cartItemsEl.innerHTML = '';
+      if (state.cart.length === 0) {
+        cartItemsEl.innerHTML = '<div class="small">Кошик порожній</div>';
+        cartTotalEl.textContent = '0 $';
+        return;
+      }
+
+      let total = 0;
+      state.cart.forEach(it => {
+        total += it.qty * it.price;
+        const el = document.createElement('div');
+        el.className = 'cart-item';
+        el.innerHTML = `
+          <div class="cart-thumb" style="background-image:url(${it.image})"></div>
+          <div style="flex:1">
+            <div style="font-weight:700">${it.name}</div>
+            <div class="small">${it.price} $ • ${it.qty} шт.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+            <button class="icon-btn" onclick="changeQty(${it.id}, 1)">+</button>
+            <button class="icon-btn" onclick="changeQty(${it.id}, -1)">-</button>
+            <button class="icon-btn" onclick="removeItem(${it.id})">🗑</button>
+          </div>
+        `;
+        cartItemsEl.appendChild(el);
+      });
+
+      cartTotalEl.textContent = total + ' $';
+    }
+
+    function updateCartUI() {
+      const count = state.cart.reduce((sum, item) => sum + item.qty, 0);
+      cartCount.textContent = count;
+      localStorage.setItem('uf_cart', JSON.stringify(state.cart));
+    }
+
+    function addToCart(id, btn) {
+      const product = PRODUCTS.find(p => p.id === id);
+      const existing = state.cart.find(item => item.id === id);
+
+      if (existing) {
+        existing.qty++;
+      } else {
+        state.cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          qty: 1
+        });
+      }
+
+      updateCartUI();
+      renderCart();
+      flyToCart(btn, product.image);
+    }
+
+    function flyToCart(btn, img) {
+      const btnRect = btn.getBoundingClientRect();
+      const cartRect = cartBtn.getBoundingClientRect();
+
+      const flyingImg = document.createElement('img');
+      flyingImg.src = img;
+      flyingImg.className = 'flying';
+      flyingImg.style.width = '120px';
+      flyingImg.style.left = `${btnRect.left}px`;
+      flyingImg.style.top = `${btnRect.top}px`;
+      document.body.appendChild(flyingImg);
+
+      setTimeout(() => {
+        flyingImg.style.transform = `translate(${cartRect.left - btnRect.left}px, ${cartRect.top - btnRect.top}px) scale(0.1)`;
+        flyingImg.style.opacity = '0.5';
+      }, 10);
+
+      setTimeout(() => {
+        flyingImg.remove();
+        cartBtn.classList.add('pulse');
+        setTimeout(() => cartBtn.classList.remove('pulse'), 400);
+      }, 800);
+    }
+
+    function openCheckout() {
+      if (state.cart.length === 0) {
+        alert('Кошик порожній! Додайте товари перед оформленням.');
+        return;
+      }
+      cartPanel.classList.remove('open');
+      checkoutPage.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckout() {
+      checkoutPage.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      
+      // Reset to first step
+      document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+      document.getElementById('step1').classList.add('active');
+      
+      // Clear cart if order was completed
+      if (document.getElementById('step5').classList.contains('active')) {
+        state.cart = [];
+        updateCartUI();
+        renderCart();
+      }
+    }
+
+    function nextStep(currentStep) {
+      // Validate current step before proceeding
+      if (currentStep === 1) {
+        const fullname = document.getElementById('fullname').value;
+        const phone = document.getElementById('phone').value;
+        if (!fullname || !phone) {
+          alert('Будь ласка, заповніть всі обов\'язкові поля');
+          return;
+        }
+      } else if (currentStep === 2) {
+        const city = document.getElementById('city').value;
+        const branch = document.getElementById('branch').value;
+        if (!city || !branch) {
+          alert('Будь ласка, заповніть всі обов\'язкові поля');
+          return;
+        }
+      }
+
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      document.getElementById(`step${currentStep + 1}`).classList.add('active');
+      
+      // Show card details if payment method is card
+      if (currentStep + 1 === 3) {
+        const total = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        paymentAmount.textContent = total + ' $';
+        
+        if (state.payment === 'card') {
+          cardDetails.style.display = 'block';
+        } else {
+          cardDetails.style.display = 'none';
+        }
+      }
+    }
+
+    function prevStep(currentStep) {
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      document.getElementById(`step${currentStep - 1}`).classList.add('active');
+    }
+
+    function selectOption(element, type) {
+      const options = document.querySelectorAll(`.${type}-option`);
+      options.forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      
+      if (type === 'delivery') {
+        state.delivery = element.querySelector('h3').textContent.toLowerCase().includes('нова') ? 'nova-poshta' : 'ukrposhta';
+      } else if (type === 'payment') {
+        state.payment = element.querySelector('h3').textContent.toLowerCase().includes('готівкою') ? 'cash' : 'card';
+        
+        // Show/hide card details
+        if (state.payment === 'card') {
+          cardDetails.style.display = 'block';
+          const total = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+          paymentAmount.textContent = total + ' $';
+        } else {
+          cardDetails.style.display = 'none';
+        }
+      }
+    }
+
+    function submitOrder() {
+      // Generate random order number
+      const orderNum = 'UF' + Math.floor(Math.random() * 1000000);
+      document.getElementById('orderNumber').textContent = orderNum;
+      
+      // Show success message
+      document.getElementById('step4').classList.remove('active');
+      document.getElementById('step5').classList.add('active');
+      
+      // Prepare order data
+      const orderData = {
+        orderNumber: orderNum,
+        customer: {
+          name: document.getElementById('fullname').value,
+          phone: document.getElementById('phone').value,
+          email: document.getElementById('email').value || null
+        },
+        delivery: {
+          method: state.delivery,
+          city: document.getElementById('city').value,
+          branch: document.getElementById('branch').value
+        },
+        payment: state.payment,
+        items: state.cart,
+        total: state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0),
+        comments: document.getElementById('comments').value || null,
+        date: new Date().toISOString()
+      };
+      
+      console.log('Order submitted:', orderData);
+      // In real app, send orderData to backend
+    }
+
+    function clearCart() {
+      state.cart = [];
+      updateCartUI();
+      renderCart();
+    }
+
+    // Global functions for cart actions
+    window.changeQty = function(id, delta) {
+      const item = state.cart.find(i => i.id === id);
+      if (!item) return;
+      
+      item.qty += delta;
+      if (item.qty < 1) {
+        state.cart = state.cart.filter(i => i.id !== id);
+      }
+      
+      updateCartUI();
+      renderCart();
+    };
+
+    window.removeItem = function(id) {
+      state.cart = state.cart.filter(i => i.id !== id);
+      updateCartUI();
+      renderCart();
+    };
+
+    // Filter products by category
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderProducts(btn.dataset.category);
+      });
+    });
+
+    // Add pulse animation style
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .pulse {
+        animation: pulse 0.4s ease;
+        transform-origin: center;
+      }
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.15); }
+        100% { transform: scale(1); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

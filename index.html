@@ -70,6 +70,11 @@
       font-weight: 700; 
       border: 0; 
       cursor: pointer; 
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .catalog-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(179, 255, 0, 0.3);
     }
     .search { 
       flex: 1; 
@@ -84,6 +89,11 @@
       border: 0; 
       background: #0b0b0b; 
       color: #ddd; 
+      transition: all 0.3s;
+    }
+    .search input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--neon);
     }
     .icons { 
       display: flex; 
@@ -97,6 +107,11 @@
       background: #0b0b0b; 
       cursor: pointer; 
       position: relative; 
+      transition: all 0.2s;
+    }
+    .icon:hover {
+      background: rgba(179, 255, 0, 0.1);
+      border-color: rgba(179, 255, 0, 0.2);
     }
     .badge { 
       position: absolute; 
@@ -111,6 +126,7 @@
       align-items: center; 
       justify-content: center; 
       font-size: 12px; 
+      animation: pulse 1.5s infinite;
     }
 
     /* HERO */
@@ -122,11 +138,16 @@
       overflow: hidden;
       position: relative;
       height: 300px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
     .hero img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 5s ease;
+    }
+    .hero:hover img {
+      transform: scale(1.05);
     }
     .hero-content {
       position: absolute;
@@ -135,6 +156,9 @@
       right: 0;
       padding: 30px;
       background: linear-gradient(to top, rgba(7,7,7,0.9), rgba(7,7,7,0.5));
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.5s 0.3s forwards;
     }
     .hero .title { 
       font-size: 32px; 
@@ -149,6 +173,7 @@
       max-width: var(--maxw); 
       margin: 20px auto; 
       padding: 0 20px; 
+      animation: fadeIn 0.8s ease;
     }
     .filter-buttons { 
       display: flex; 
@@ -169,12 +194,14 @@
     .filter-btn:hover { 
       background: rgba(179,255,0,0.1); 
       color: #fff; 
+      transform: translateY(-2px);
     }
     .filter-btn.active { 
       background: var(--neon); 
       color: #000; 
       font-weight: 700; 
       border-color: var(--neon); 
+      box-shadow: 0 4px 12px rgba(179, 255, 0, 0.3);
     }
 
     /* CATALOG GRID */
@@ -182,6 +209,7 @@
       max-width: var(--maxw); 
       margin: 24px auto; 
       padding: 0 20px; 
+      animation: fadeIn 1s ease;
     }
     .catalog h2 { 
       color: var(--neon); 
@@ -201,6 +229,12 @@
       display: flex; 
       flex-direction: column; 
       gap: 10px; 
+      transition: all 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      border-color: rgba(179, 255, 0, 0.2);
     }
     .card .img { 
       height: 150px; 
@@ -209,6 +243,11 @@
       background-size: cover; 
       background-position: center; 
       border: 1px solid rgba(255,255,255,0.02); 
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .card:hover .img {
+      transform: scale(1.03);
     }
     .meta { 
       display: flex; 
@@ -228,6 +267,11 @@
       border: 0; 
       cursor: pointer; 
       font-weight: 700; 
+      transition: all 0.2s;
+    }
+    .buy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(179, 255, 0, 0.3);
     }
     .tag { 
       background: #122012; 
@@ -236,6 +280,7 @@
       border-radius: 4px; 
       font-size: 12px; 
       border: 1px solid rgba(179,255,0,0.12); 
+      animation: pulse 2s infinite;
     }
     .small { 
       color: var(--muted); 
@@ -268,6 +313,7 @@
       transform: translateY(0); 
       opacity: 1; 
       pointer-events: auto; 
+      animation: slideUp 0.3s ease;
     }
     .cart-item { 
       display: flex; 
@@ -277,6 +323,10 @@
       border-radius: 6px; 
       border: 1px solid rgba(255,255,255,0.02); 
       margin-bottom: 8px; 
+      transition: all 0.2s;
+    }
+    .cart-item:hover {
+      background: rgba(255,255,255,0.03);
     }
     .cart-thumb { 
       width: 64px; 
@@ -284,12 +334,26 @@
       background-size: cover; 
       background-position: center; 
       border-radius: 6px; 
+      cursor: pointer;
     }
     .cart-total { 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
       margin-top: 8px; 
+    }
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .icon-btn:hover {
+      color: var(--neon);
+      background: rgba(179, 255, 0, 0.1);
     }
 
     /* CHECKOUT PAGE */
@@ -303,6 +367,7 @@
       z-index: 102;
       overflow-y: auto;
       display: none;
+      animation: fadeIn 0.3s ease;
     }
     .checkout-container {
       max-width: 600px;
@@ -310,6 +375,23 @@
       padding: 30px;
       background: var(--panel);
       border-radius: var(--radius);
+      position: relative;
+    }
+    .back-to-shop {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .back-to-shop:hover {
+      color: var(--neon);
     }
     .step {
       display: none;
@@ -338,6 +420,12 @@
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: var(--radius);
       color: #fff;
+      transition: all 0.2s;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--neon);
+      box-shadow: 0 0 0 2px rgba(179, 255, 0, 0.2);
     }
     .btn-group {
       display: flex;
@@ -349,16 +437,25 @@
       border-radius: var(--radius);
       font-weight: 700;
       cursor: pointer;
+      transition: all 0.2s;
     }
     .btn-next, .btn-submit {
       background: var(--neon);
       color: #000;
       border: none;
     }
+    .btn-next:hover, .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(179, 255, 0, 0.3);
+    }
     .btn-prev {
       background: none;
       color: var(--muted);
       border: 1px solid var(--muted);
+    }
+    .btn-prev:hover {
+      color: #fff;
+      border-color: #fff;
     }
     .delivery-option, .payment-option {
       background: var(--card);
@@ -371,19 +468,23 @@
     }
     .delivery-option:hover, .payment-option:hover {
       border-color: var(--neon);
+      transform: translateY(-2px);
     }
     .delivery-option.selected, .payment-option.selected {
       border-color: var(--neon);
       background: rgba(179, 255, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(179, 255, 0, 0.1);
     }
     .success-message {
       text-align: center;
       padding: 40px 20px;
+      animation: fadeIn 0.5s ease;
     }
     .success-icon {
       font-size: 60px;
       color: var(--neon);
       margin-bottom: 20px;
+      animation: bounce 1s ease;
     }
     .card-details {
       margin-top: 20px;
@@ -391,12 +492,208 @@
       background: var(--card);
       border-radius: var(--radius);
       border: 1px solid rgba(179, 255, 0, 0.1);
+      animation: slideUp 0.3s ease;
     }
     .card-details img {
       max-width: 200px;
       margin: 10px auto;
       display: block;
       border-radius: var(--radius);
+    }
+
+    /* LOGIN MODAL */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(7,7,7,0.95);
+      z-index: 103;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+    .login-container {
+      background: var(--panel);
+      padding: 30px;
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+    .close-login {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .login-title {
+      color: var(--neon);
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+    .login-form .form-group {
+      margin-bottom: 20px;
+    }
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--neon);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(179, 255, 0, 0.3);
+    }
+    .login-footer {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .login-footer a {
+      color: var(--neon);
+      text-decoration: underline;
+    }
+
+    /* PRODUCT DETAIL MODAL */
+    .product-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(7,7,7,0.95);
+      z-index: 104;
+      display: none;
+      overflow-y: auto;
+      animation: fadeIn 0.3s ease;
+    }
+    .product-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: var(--panel);
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .close-product {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .product-content {
+      display: flex;
+      gap: 30px;
+    }
+    .product-gallery {
+      flex: 1;
+    }
+    .product-main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: contain;
+      background: var(--card);
+      border-radius: var(--radius);
+      margin-bottom: 15px;
+    }
+    .product-thumbnails {
+      display: flex;
+      gap: 10px;
+    }
+    .product-thumbnail {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.2s;
+    }
+    .product-thumbnail:hover {
+      border-color: var(--neon);
+      transform: translateY(-3px);
+    }
+    .product-info {
+      flex: 1;
+    }
+    .product-title {
+      color: var(--neon);
+      margin-top: 0;
+      font-size: 28px;
+    }
+    .product-price {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--neon);
+      margin: 15px 0;
+    }
+    .product-description {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .product-meta {
+      margin-top: 20px;
+    }
+    .product-meta-item {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .product-meta-label {
+      color: var(--neon);
+      min-width: 120px;
+    }
+    .product-meta-value {
+      color: var(--muted);
+    }
+    .product-actions {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+    }
+    .product-buy {
+      padding: 12px 25px;
+      background: var(--neon);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .product-buy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(179, 255, 0, 0.3);
+    }
+    .product-wishlist {
+      padding: 12px 25px;
+      background: none;
+      color: var(--muted);
+      border: 1px solid var(--muted);
+      border-radius: var(--radius);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .product-wishlist:hover {
+      color: #fff;
+      border-color: #fff;
     }
 
     /* FLY ANIMATION */
@@ -416,11 +713,30 @@
       color: var(--muted); 
       font-size: 13px; 
       text-align: center;
+      animation: fadeIn 1.2s ease;
     }
 
+    /* ANIMATIONS */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
     }
 
     @media (max-width: 900px) {
@@ -435,6 +751,12 @@
       .checkout-container {
         margin: 20px auto;
         padding: 20px;
+      }
+      .product-content {
+        flex-direction: column;
+      }
+      .product-main-image {
+        height: 300px;
       }
     }
   </style>
@@ -455,7 +777,7 @@
         <button class="icon">🔍</button>
       </div>
       <div class="icons">
-        <div class="icon">Вхід</div>
+        <div class="icon" id="loginBtn">Вхід</div>
         <div class="icon">❤</div>
         <div class="icon">≡</div>
         <div class="icon" id="cartBtn">Корзина <div class="badge" id="cartCount">0</div></div>
@@ -498,9 +820,77 @@
     </div>
   </div>
 
+  <!-- LOGIN MODAL -->
+  <div class="login-modal" id="loginModal">
+    <div class="login-container">
+      <button class="close-login" id="closeLogin">×</button>
+      <h2 class="login-title">Вхід в аккаунт</h2>
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" class="form-control" placeholder="Ваш email" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Пароль</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="Ваш пароль" required>
+        </div>
+        <button type="submit" class="login-btn">Увійти</button>
+      </form>
+      <div class="login-footer">
+        Немає аккаунту? <a href="#" id="showRegister">Зареєструватись</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTER MODAL -->
+  <div class="login-modal" id="registerModal">
+    <div class="login-container">
+      <button class="close-login" id="closeRegister">×</button>
+      <h2 class="login-title">Реєстрація</h2>
+      <form class="login-form" id="registerForm">
+        <div class="form-group">
+          <label for="registerName">Ім'я</label>
+          <input type="text" id="registerName" class="form-control" placeholder="Ваше ім'я" required>
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" class="form-control" placeholder="Ваш email" required>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Пароль</label>
+          <input type="password" id="registerPassword" class="form-control" placeholder="Ваш пароль" required>
+        </div>
+        <div class="form-group">
+          <label for="registerConfirm">Підтвердіть пароль</label>
+          <input type="password" id="registerConfirm" class="form-control" placeholder="Повторіть пароль" required>
+        </div>
+        <button type="submit" class="login-btn">Зареєструватись</button>
+      </form>
+      <div class="login-footer">
+        Вже є аккаунт? <a href="#" id="showLogin">Увійти</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT DETAIL MODAL -->
+  <div class="product-modal" id="productModal">
+    <div class="product-container">
+      <button class="close-product" id="closeProduct">×</button>
+      <div class="product-content" id="productContent"></div>
+    </div>
+  </div>
+
   <!-- UNFAIR LOGISTICS CHECKOUT -->
   <div class="checkout-page" id="checkoutPage">
     <div class="checkout-container">
+      <button class="back-to-shop" onclick="closeCheckout()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Назад до магазину
+      </button>
+      
       <div class="step active" id="step1">
         <h2 class="step-title">1. Контактні дані</h2>
         <div class="form-group">
@@ -603,20 +993,183 @@
 
   <script>
     const PRODUCTS = [
-      {id:1, name:'Razer DeathAdder V3', cat:['mouse'], price:69, image:'https://images.unsplash.com/photo-1612810807260-c4b2b2f9b1b6?auto=format&fit=crop&w=800&q=60', tag:'Хіт'},
-      {id:2, name:'Logitech G Pro X Headset', cat:['audio'], price:129, image:'https://images.unsplash.com/photo-1606813902835-2c8a3d6a7a7b?auto=format&fit=crop&w=800&q=60', tag:'NEW'},
-      {id:3, name:'Corsair K70 RGB', cat:['keyboard'], price:149, image:'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=800&q=60', tag:'Акція'},
-      {id:4, name:'ASUS ROG Zephyrus', cat:['laptop'], price:1799, image:'https://images.unsplash.com/photo-1612832021021-4f4b1f3f0aef?auto=format&fit=crop&w=1200&q=60', tag:''},
-      {id:5, name:'HyperX Cloud II', cat:['audio'], price:99, image:'https://images.unsplash.com/photo-1545235617-9465b4ef2f2b?auto=format&fit=crop&w=800&q=60', tag:'Готово'},
-      {id:6, name:'SteelSeries Rival 3', cat:['mouse'], price:39, image:'https://images.unsplash.com/photo-1580281657524-7f9f3b1a9e73?auto=format&fit=crop&w=800&q=60', tag:''},
-      {id:7, name:'Nintendo Switch (Lite)', cat:['console'], price:199, image:'https://images.unsplash.com/photo-1579758629931-6d3e6b4ef7ad?auto=format&fit=crop&w=800&q=60', tag:'Бест'},
-      {id:8, name:'Elgato Stream Deck', cat:['stream'], price:149, image:'https://images.unsplash.com/photo-1606312619343-1c4f5f2b7f7a?auto=format&fit=crop&w=800&q=60', tag:'Top'}
+      {
+        id: 1, 
+        name: 'Razer DeathAdder V3', 
+        cat: ['mouse'], 
+        price: 69, 
+        image: 'https://images.unsplash.com/photo-1612810807260-c4b2b2f9b1b6?auto=format&fit=crop&w=800&q=60', 
+        images: [
+          'https://images.unsplash.com/photo-1612810807260-c4b2b2f9b1b6?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=60'
+        ],
+        tag: 'Хіт',
+        description: 'Ігрова миша Razer DeathAdder V3 з ультралегким дизайном та високою точністю сенсора. Ідеальний вибір для професійних геймерів.',
+        specs: {
+          'Тип': 'Ігрова миша',
+          'Сенсор': 'Focus Pro 30K Optical',
+          'DPI': 'до 30000',
+          'Кнопки': '8 програмованих',
+          'Вага': '58 г'
+        }
+      },
+      {
+        id: 2, 
+        name: 'Logitech G Pro X Headset', 
+        cat: ['audio'], 
+        price: 129, 
+        image: 'https://images.unsplash.com/photo-1606813902835-2c8a3d6a7a7b?auto=format&fit=crop&w=800&q=60',
+        images: [
+          'https://images.unsplash.com/photo-1606813902835-2c8a3d6a7a7b?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=800&q=60'
+        ],
+        tag: 'NEW',
+        description: 'Професійні ігрові навушники Logitech G Pro X з мікрофоном Blue VO!CE для чіткого звуку та комунікації.',
+        specs: {
+          'Тип': 'Навушники з мікрофоном',
+          'Діапазон частот': '20Hz-20kHz',
+          'Імпеданс': '35 Ом',
+          'Мікрофон': 'Blue VO!CE',
+          'Вага': '320 г'
+        }
+      },
+      {
+        id: 3, 
+        name: 'Corsair K70 RGB', 
+        cat: ['keyboard'], 
+        price: 149, 
+        image: 'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=800&q=60',
+        images: [
+          'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=800&q=60'
+        ],
+        tag: 'Акція',
+        description: 'Механічна ігрова клавіатура Corsair K70 RGB з перемикачами Cherry MX та індивідуальною підсвіткою кожної клавіші.',
+        specs: {
+          'Тип': 'Механічна клавіатура',
+          'Перемикачі': 'Cherry MX Red',
+          'Підсвітка': 'RGB per-key',
+          'Антигейт': 'Так',
+          'USB-порт': '1 x USB 2.0'
+        }
+      },
+      {
+        id: 4, 
+        name: 'ASUS ROG Zephyrus', 
+        cat: ['laptop'], 
+        price: 1799, 
+        image: 'https://images.unsplash.com/photo-1612832021021-4f4b1f3f0aef?auto=format&fit=crop&w=1200&q=60',
+        images: [
+          'https://images.unsplash.com/photo-1612832021021-4f4b1f3f0aef?auto=format&fit=crop&w=1200&q=60',
+          'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1593642702821-8f5ef0a043a3?auto=format&fit=crop&w=800&q=60'
+        ],
+        tag: '',
+        description: 'Ігровий ноутбук ASUS ROG Zephyrus з процесором Intel Core i9 та відеокартою NVIDIA RTX 3080 для максимальної продуктивності.',
+        specs: {
+          'Процесор': 'Intel Core i9-12900H',
+          'Відеокарта': 'NVIDIA RTX 3080',
+          'Оперативна пам\'ять': '32GB DDR5',
+          'Накопичувач': '1TB NVMe SSD',
+          'Діагональ екрана': '15.6" QHD 165Hz'
+        }
+      },
+      {
+        id: 5, 
+        name: 'HyperX Cloud II', 
+        cat: ['audio'], 
+        price: 99, 
+        image: 'https://images.unsplash.com/photo-1545235617-9465b4ef2f2b?auto=format&fit=crop&w=800&q=60',
+        images: [
+          'https://images.unsplash.com/photo-1545235617-9465b4ef2f2b?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=60'
+        ],
+        tag: 'Готово',
+        description: 'Ігрові навушники HyperX Cloud II з 7.1 віртуальним surround sound та USB звуковою картою для імерсивного геймплею.',
+        specs: {
+          'Тип': 'Навушники з мікрофоном',
+          'Діапазон частот': '15Hz-25kHz',
+          'Імпеданс': '60 Ом',
+          'Мікрофон': 'Знімний шумозаглушуючий',
+          'Вага': '320 г'
+        }
+      },
+      {
+        id: 6, 
+        name: 'SteelSeries Rival 3', 
+        cat: ['mouse'], 
+        price: 39, 
+        image: 'https://images.unsplash.com/photo-1580281657524-7f9f3b1a9e73?auto=format&fit=crop&w=800&q=60',
+        images: [
+          'https://images.unsplash.com/photo-1580281657524-7f9f3b1a9e73?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=60'
+        ],
+        tag: '',
+        description: 'Ігрова миша SteelSeries Rival 3 з оптичним сенсором TrueMove Core та RGB підсвіткою за доступною ціною.',
+        specs: {
+          'Тип': 'Ігрова миша',
+          'Сенсор': 'TrueMove Core Optical',
+          'DPI': 'до 8500',
+          'Кнопки': '6 програмованих',
+          'Вага': '77 г'
+        }
+      },
+      {
+        id: 7, 
+        name: 'Nintendo Switch (Lite)', 
+        cat: ['console'], 
+        price: 199, 
+        image: 'https://images.unsplash.com/photo-1579758629931-6d3e6b4ef7ad?auto=format&fit=crop&w=800&q=60',
+        images: [
+          'https://images.unsplash.com/photo-1579758629931-6d3e6b4ef7ad?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1585857188823-536b88c3a0a0?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1585857188823-536b88c3a0a0?auto=format&fit=crop&w=800&q=60'
+        ],
+        tag: 'Бест',
+        description: 'Портативна ігрова консоль Nintendo Switch Lite з 5.5" сенсорним екраном та вбудованими джойстиками.',
+        specs: {
+          'Тип': 'Ігрова консоль',
+          'Процесор': 'NVIDIA Custom Tegra',
+          'Екран': '5.5" 720p LCD',
+          'Пам\'ять': '32GB (розширювана)',
+          'Акумулятор': 'до 7 годин гри'
+        }
+      },
+      {
+        id: 8, 
+        name: 'Elgato Stream Deck', 
+        cat: ['stream'], 
+        price: 149, 
+        image: 'https://images.unsplash.com/photo-1606312619343-1c4f5f2b7f7a?auto=format&fit=crop&w=800&q=60',
+        images: [
+          'https://images.unsplash.com/photo-1606312619343-1c4f5f2b7f7a?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=800&q=60'
+        ],
+        tag: 'Top',
+        description: 'Elgato Stream Deck - це професійна панель керування з 15 програмованими LCD-кнопками для стрімерів та створювачів контенту.',
+        specs: {
+          'Тип': 'Панель керування',
+          'Кнопки': '15 програмованих LCD',
+          'Підключення': 'USB 2.0',
+          'Сумісність': 'Windows 10/11, macOS 10.13+',
+          'Розміри': '107 x 103 x 26 мм'
+        }
+      }
     ];
 
     let state = { 
       cart: JSON.parse(localStorage.getItem('uf_cart') || '[]'),
       delivery: 'nova-poshta',
-      payment: 'cash'
+      payment: 'cash',
+      currentStep: 1,
+      user: JSON.parse(localStorage.getItem('uf_user') || null),
+      currentProduct: null
     };
 
     // DOM Elements
@@ -631,36 +1184,216 @@
     const clearCartBtn = document.getElementById('clearCart');
     const cardDetails = document.getElementById('cardDetails');
     const paymentAmount = document.getElementById('paymentAmount');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeLogin = document.getElementById('closeLogin');
+    const loginForm = document.getElementById('loginForm');
+    const registerModal = document.getElementById('registerModal');
+    const closeRegister = document.getElementById('closeRegister');
+    const registerForm = document.getElementById('registerForm');
+    const showRegister = document.getElementById('showRegister');
+    const showLogin = document.getElementById('showLogin');
+    const productModal = document.getElementById('productModal');
+    const closeProduct = document.getElementById('closeProduct');
+    const productContent = document.getElementById('productContent');
 
     // Initialize
     renderProducts();
     renderCart();
     updateCartUI();
+    updateUserUI();
 
     // Event Listeners
-    cartBtn.addEventListener('click', () => {
-      cartPanel.classList.toggle('open');
-      renderCart();
-    });
-
+    cartBtn.addEventListener('click', toggleCartPanel);
     checkoutBtn.addEventListener('click', openCheckout);
     clearCartBtn.addEventListener('click', clearCart);
+    loginBtn.addEventListener('click', openLoginModal);
+    closeLogin.addEventListener('click', closeLoginModal);
+    closeRegister.addEventListener('click', closeRegisterModal);
+    closeProduct.addEventListener('click', closeProductModal);
+    showRegister.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeLoginModal();
+      openRegisterModal();
+    });
+    showLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeRegisterModal();
+      openLoginModal();
+    });
+
+    // Close modals when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!cartPanel.contains(e.target) && e.target !== cartBtn && !cartBtn.contains(e.target)) {
+        cartPanel.classList.remove('open');
+      }
+      if (e.target === loginModal) {
+        closeLoginModal();
+      }
+      if (e.target === registerModal) {
+        closeRegisterModal();
+      }
+      if (e.target === productModal) {
+        closeProductModal();
+      }
+    });
+
+    // Login form submit
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Simple validation
+      if (!email || !password) {
+        alert('Будь ласка, заповніть всі поля');
+        return;
+      }
+      
+      // In a real app, you would send this to your backend
+      state.user = {
+        name: email.split('@')[0],
+        email: email
+      };
+      
+      localStorage.setItem('uf_user', JSON.stringify(state.user));
+      updateUserUI();
+      closeLoginModal();
+      alert('Ви успішно увійшли!');
+    });
+
+    // Register form submit
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirm = document.getElementById('registerConfirm').value;
+      
+      // Simple validation
+      if (!name || !email || !password || !confirm) {
+        alert('Будь ласка, заповніть всі поля');
+        return;
+      }
+      
+      if (password !== confirm) {
+        alert('Паролі не співпадають');
+        return;
+      }
+      
+      // In a real app, you would send this to your backend
+      state.user = {
+        name: name,
+        email: email
+      };
+      
+      localStorage.setItem('uf_user', JSON.stringify(state.user));
+      updateUserUI();
+      closeRegisterModal();
+      alert('Реєстрація успішна! Ви увійшли в систему.');
+    });
 
     // Functions
+    function updateUserUI() {
+      if (state.user) {
+        loginBtn.textContent = state.user.name;
+      } else {
+        loginBtn.textContent = 'Вхід';
+      }
+    }
+
+    function openLoginModal() {
+      loginModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLoginModal() {
+      loginModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function openRegisterModal() {
+      registerModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeRegisterModal() {
+      registerModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function openProductModal(productId) {
+      state.currentProduct = PRODUCTS.find(p => p.id === productId);
+      if (!state.currentProduct) return;
+      
+      renderProductDetails();
+      productModal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductModal() {
+      productModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function renderProductDetails() {
+      if (!state.currentProduct) return;
+      
+      const p = state.currentProduct;
+      productContent.innerHTML = `
+        <div class="product-gallery">
+          <img src="${p.images[0]}" alt="${p.name}" class="product-main-image" id="mainProductImage">
+          <div class="product-thumbnails">
+            ${p.images.map((img, i) => `
+              <img src="${img}" alt="${p.name} - фото ${i+1}" class="product-thumbnail" 
+                   onclick="document.getElementById('mainProductImage').src = '${img}'">
+            `).join('')}
+          </div>
+        </div>
+        <div class="product-info">
+          <h1 class="product-title">${p.name}</h1>
+          <div class="product-price">${p.price} $</div>
+          <div class="product-description">${p.description}</div>
+          
+          <div class="product-meta">
+            ${Object.entries(p.specs).map(([key, value]) => `
+              <div class="product-meta-item">
+                <div class="product-meta-label">${key}:</div>
+                <div class="product-meta-value">${value}</div>
+              </div>
+            `).join('')}
+          </div>
+          
+          <div class="product-actions">
+            <button class="product-buy" onclick="addToCart(${p.id}, this); closeProductModal()">Купити</button>
+            <button class="product-wishlist">В обране</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleCartPanel() {
+      cartPanel.classList.toggle('open');
+      if (cartPanel.classList.contains('open')) {
+        renderCart();
+      }
+    }
+
     function renderProducts(category = 'all') {
       productsEl.innerHTML = '';
       const filtered = category === 'all' 
         ? PRODUCTS 
         : PRODUCTS.filter(p => p.cat.includes(category));
       
-      filtered.forEach(p => {
+      filtered.forEach((p, index) => {
         const card = document.createElement('div');
         card.className = 'card';
+        card.style.animationDelay = `${index * 0.1}s`;
         card.innerHTML = `
-          <div class="img" style="background-image:url(${p.image})"></div>
+          <div class="img" style="background-image:url(${p.image})" onclick="openProductModal(${p.id})"></div>
           <div style="display:flex;justify-content:space-between;align-items:start">
             <div style="flex:1">
-              <div style="font-weight:700;margin-bottom:6px">${p.name}</div>
+              <div style="font-weight:700;margin-bottom:6px" onclick="openProductModal(${p.id})" style="cursor:pointer">${p.name}</div>
               <div class="small">Категорія: ${p.cat.join(', ')}</div>
             </div>
             <div>${p.tag ? `<div class="tag">${p.tag}</div>` : ''}</div>
@@ -696,7 +1429,7 @@
         const el = document.createElement('div');
         el.className = 'cart-item';
         el.innerHTML = `
-          <div class="cart-thumb" style="background-image:url(${it.image})"></div>
+          <div class="cart-thumb" style="background-image:url(${it.image})" onclick="openProductModal(${it.id})"></div>
           <div style="flex:1">
             <div style="font-weight:700">${it.name}</div>
             <div class="small">${it.price} $ • ${it.qty} шт.</div>
@@ -772,6 +1505,7 @@
       cartPanel.classList.remove('open');
       checkoutPage.style.display = 'block';
       document.body.style.overflow = 'hidden';
+      state.currentStep = 1;
     }
 
     function closeCheckout() {
@@ -781,6 +1515,7 @@
       // Reset to first step
       document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
       document.getElementById('step1').classList.add('active');
+      state.currentStep = 1;
       
       // Clear cart if order was completed
       if (document.getElementById('step5').classList.contains('active')) {
@@ -810,6 +1545,7 @@
 
       document.getElementById(`step${currentStep}`).classList.remove('active');
       document.getElementById(`step${currentStep + 1}`).classList.add('active');
+      state.currentStep = currentStep + 1;
       
       // Show card details if payment method is card
       if (currentStep + 1 === 3) {
@@ -822,11 +1558,18 @@
           cardDetails.style.display = 'none';
         }
       }
+      
+      // Scroll to top of checkout container
+      document.querySelector('.checkout-container').scrollTo(0, 0);
     }
 
     function prevStep(currentStep) {
       document.getElementById(`step${currentStep}`).classList.remove('active');
       document.getElementById(`step${currentStep - 1}`).classList.add('active');
+      state.currentStep = currentStep - 1;
+      
+      // Scroll to top of checkout container
+      document.querySelector('.checkout-container').scrollTo(0, 0);
     }
 
     function selectOption(element, type) {
@@ -851,6 +1594,11 @@
     }
 
     function submitOrder() {
+      // Validate all required fields
+      if (!validateCheckoutForm()) {
+        return;
+      }
+      
       // Generate random order number
       const orderNum = 'UF' + Math.floor(Math.random() * 1000000);
       document.getElementById('orderNumber').textContent = orderNum;
@@ -858,6 +1606,7 @@
       // Show success message
       document.getElementById('step4').classList.remove('active');
       document.getElementById('step5').classList.add('active');
+      state.currentStep = 5;
       
       // Prepare order data
       const orderData = {
@@ -881,12 +1630,43 @@
       
       console.log('Order submitted:', orderData);
       // In real app, send orderData to backend
+      
+      // Scroll to top of success message
+      document.querySelector('.checkout-container').scrollTo(0, 0);
+    }
+
+    function validateCheckoutForm() {
+      // Check if all required fields are filled
+      const requiredFields = [
+        { id: 'fullname', message: "Будь ласка, введіть ваше повне ім'я" },
+        { id: 'phone', message: "Будь ласка, введіть ваш номер телефону" },
+        { id: 'city', message: "Будь ласка, введіть ваше місто" },
+        { id: 'branch', message: "Будь ласка, введіть номер відділення" }
+      ];
+      
+      for (const field of requiredFields) {
+        const element = document.getElementById(field.id);
+        if (!element.value.trim()) {
+          alert(field.message);
+          element.focus();
+          return false;
+        }
+      }
+      
+      return true;
     }
 
     function clearCart() {
+      if (state.cart.length === 0) return;
+      
+      if (!confirm('Ви впевнені, що хочете очистити кошик?')) {
+        return;
+      }
+      
       state.cart = [];
       updateCartUI();
       renderCart();
+      cartPanel.classList.remove('open');
     }
 
     // Global functions for cart actions
@@ -918,20 +1698,59 @@
       });
     });
 
-    // Add pulse animation style
-    const style = document.createElement('style');
-    style.innerHTML = `
-      .pulse {
-        animation: pulse 0.4s ease;
-        transform-origin: center;
+    // Search functionality
+    document.getElementById('search').addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      if (searchTerm.length < 2) {
+        renderProducts();
+        return;
       }
-      @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.15); }
-        100% { transform: scale(1); }
+      
+      const filtered = PRODUCTS.filter(p => 
+        p.name.toLowerCase().includes(searchTerm) || 
+        p.cat.some(c => c.toLowerCase().includes(searchTerm))
+      );
+      
+      renderFilteredProducts(filtered);
+    });
+
+    function renderFilteredProducts(filteredProducts) {
+      productsEl.innerHTML = '';
+      
+      if (filteredProducts.length === 0) {
+        productsEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">Товари не знайдено</div>';
+        return;
       }
-    `;
-    document.head.appendChild(style);
+      
+      filteredProducts.forEach((p, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.innerHTML = `
+          <div class="img" style="background-image:url(${p.image})" onclick="openProductModal(${p.id})"></div>
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <div style="flex:1">
+              <div style="font-weight:700;margin-bottom:6px" onclick="openProductModal(${p.id})" style="cursor:pointer">${p.name}</div>
+              <div class="small">Категорія: ${p.cat.join(', ')}</div>
+            </div>
+            <div>${p.tag ? `<div class="tag">${p.tag}</div>` : ''}</div>
+          </div>
+          <div class="meta">
+            <div class="price">${p.price} $</div>
+            <div class="actions"><button class="buy" data-id="${p.id}">КУПИТИ</button></div>
+          </div>
+        `;
+        productsEl.appendChild(card);
+      });
+
+      // Add event listeners to buy buttons
+      document.querySelectorAll('.buy').forEach(b => {
+        b.addEventListener('click', (e) => {
+          const id = +e.currentTarget.dataset.id;
+          addToCart(id, e.currentTarget);
+        });
+      });
+    }
   </script>
 </body>
 </html>
